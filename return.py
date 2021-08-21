@@ -26,5 +26,11 @@ chose = input("give me what do you want :")
 if chose == "+":
 
     print(f"{a} {chose} {b} = "+str(add(a, b)))
-else:
+elif chose == "-":
     print(f"{a} {chose} {b} = "+str(subtract(a, b)))
+elif chose == "*":
+    print(f"{a} {chose} {b} = "+str(multiply(a, b)))
+elif chose == "/":
+    print(f"{a} {chose} {b} = "+str(divide(a, b)))
+else:
+    print(f"{chose} is not a oprition ")
