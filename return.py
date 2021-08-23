@@ -40,9 +40,8 @@ elif chose == "/":
 else:
     print(f"{chose} is not a oprition ")
 isr=int(input("you want contin or not 1=no or 0=yes"))
-anser1 = 0
+
 while not isr:
-    print(str(anser1))
     n1=float(input("number 1: "))
     opr = ["+", "-", "/", "*"]
 
@@ -51,9 +50,17 @@ while not isr:
     chose = input("give me what do you want :")
 
     if chose == "+":
-        anser1 += add(anser, n1)
-        print(f"{str(anser)} {chose} {n1} = " + str(anser1))
+        anser+=n1
+        print( str(anser))
+    elif chose == "-":
+        anser-=n1
+        print(str(anser))
+    elif chose=="*":
+        anser*=n1
+        print(str(anser))
+    elif chose == "/":
+        anser /= n1
+        print(str(anser))
     else:
-        print("test")
+        print(f"{chose} is not a oprition ")
     isr = int(input("you want contin or not 1=no or 0=yes"))
-print("test")
