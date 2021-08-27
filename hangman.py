@@ -1,5 +1,6 @@
 # import  random
 import random
+
 list_of_words = ["lion", "mouse", "laptop"]
 stages = ['''
   +---+
@@ -77,7 +78,7 @@ while not win:
     if letter not in list_of:
         test -= 1
         if test == 0:
-            win=1
+            win = 1
             print("lose")
 
     if "_" not in mots:
