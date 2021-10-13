@@ -32,6 +32,8 @@
 #
 # print( "number the post used : "+str(count))
 # print( "number the post no used : "+str(count1))
+import time
+
 import praw
 import datetime
 reddit = praw.Reddit(
@@ -45,8 +47,10 @@ count = 0
 count1 = 0
 word = ["griffiths", "review", "course", "courses"]
 subreddit = reddit.subreddit('GAMSAT')
-hot_python = subreddit.new(limit=250000)
+hot_python = subreddit.new(limit=30000)
 for subm in hot_python:
+    interval = time.time() - 60 * 60 * 24 * 7
+    interval_month = time.time() - 60 * 60 * 24 * 30 * 2
     bool = True
     subreddit_title = subm.title
     subreddit_text = subm.selftext
@@ -58,11 +62,13 @@ for subm in hot_python:
             bool = False
             count1 += 1
             break
-    if bool == True:
-        print("title :{}  \ndate : {}\ntext: {}".format(subm.title, datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d'), subm.selftext[:10000000000000]))
+    if bool == True and subm.created_utc < interval and subm.created_utc > interval_month :
+        print("title :{}  \ndate : {}\ntext: {}".format(subm.title, datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d'), subm.selftext))
         count += 1
 
 print("number the post used : "+str(count))
+print("day"+str(interval))
+# print("month"+str(interval_month))
 print("number the post no used : "+str(count1))
 
 
