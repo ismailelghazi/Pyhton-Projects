@@ -37,8 +37,9 @@ reddit5 = praw.Reddit(
     user_agent='ismail4',
     username='Amazing-Broccoli-543',
 )
-list_reddit_account = ["reddit1", "reddit2", "reddit3", "reddit4", "reddit5"]
-reddit=list_of = random.choice(list_reddit_account)
+list_reddit_account = [reddit5, reddit3, reddit2, reddit4, reddit1]
+reddit = random.choice(list_reddit_account)
+print(reddit.user.me())
 print(reddit)
 count = 0
 count1 = 0
