@@ -2,6 +2,7 @@ import time
 import random
 import praw
 import datetime
+import json
 reddit1 = praw.Reddit(
     client_id='xCQgBw-kL-Dh6ceO12hLPg',
     client_secret='CW9QeOa_VMhAmnRWDBjpwD_aaWYpMQ',
@@ -39,14 +40,16 @@ reddit5 = praw.Reddit(
 )
 list_reddit_account = [reddit5, reddit3, reddit2, reddit4, reddit1]
 reddit = random.choice(list_reddit_account)
+list_data = []
 print(reddit.user.me())
 print(reddit)
 count = 0
 count1 = 0
 word = ["griffiths", "review", "course", "courses"]
 subreddit = reddit.subreddit('GAMSAT')
-hot_python = subreddit.new(limit=50)
+hot_python = subreddit.new(limit=1500)
 for subm in hot_python:
+    data_reddit_Dict = {}
     interval = time.time() - 60 * 60 * 24 * 7
     interval_month = time.time() - 60 * 60 * 24 * 30 * 2
     bool = True
@@ -61,9 +64,19 @@ for subm in hot_python:
             count1 += 1
             break
     if bool == True and subm.created_utc <interval and subm.created_utc >interval_month:
-        print("title :{}  \ndate : {}\ntext: {}".format(subm.title, datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d'), subm.selftext))
         count += 1
-
+        data_reddit_Dict['id'] = subm.id
+        data_reddit_Dict['date'] = datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d')
+        data_reddit_Dict['title'] = subm.title
+        data_reddit_Dict['text'] = subm.selftext
+        list_data.append(data_reddit_Dict)
+        # data_reddit_Dict['date'] = subm.datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d')
+        # print("id: {} \ntitle : {}  \ndate : {}\ntext: {}".format(subm.id, subm.title, datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d'), subm.selftext))
+data_reddit_Dict["data"] = list_data
+with open("data_json.json","w") as outfile:
+    json.dump(data_reddit_Dict,outfile)
+for x in list_data:
+    print(x)
 print("number the post used : "+str(count))
 print("day"+str(interval))
 # print("month"+str(interval_month))

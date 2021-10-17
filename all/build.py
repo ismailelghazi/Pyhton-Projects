@@ -21,7 +21,7 @@ while True:
     BlindDict = {}
     name = input("give me your name if you want join to this khra ")
     build = float(input("bcja7l dakhl nta asat "))
-    BlindDict[name] = build
+    BlindDict[name] = bui
     Add_Person = int(input("Do you want to add more users (0 or 1)?\n"))
     if Add_Person ==0:
         find_highest_bidder(BlindDict)
