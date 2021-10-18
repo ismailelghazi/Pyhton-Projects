@@ -39,45 +39,55 @@ reddit5 = praw.Reddit(
     username='Amazing-Broccoli-543',
 )
 list_reddit_account = [reddit5, reddit3, reddit2, reddit4, reddit1]
-reddit = random.choice(list_reddit_account)
 list_data = []
-print(reddit.user.me())
-print(reddit)
 count = 0
 count1 = 0
 word = ["griffiths", "review", "course", "courses"]
-subreddit = reddit.subreddit('GAMSAT')
-hot_python = subreddit.new(limit=1500)
-for subm in hot_python:
-    data_reddit_Dict = {}
-    interval = time.time() - 60 * 60 * 24 * 7
-    interval_month = time.time() - 60 * 60 * 24 * 30 * 2
-    bool = True
-    subreddit_title = subm.title
-    subreddit_text = subm.selftext
-    date1 = datetime.datetime.fromtimestamp(subm.created_utc).strftime("%Y-%m-%d")
-
-    for test in word:
-        if subreddit_title.find(test) != -1 or subreddit_text.find(test) != -1:
-            print("*******")
-            bool = False
-            count1 += 1
-            break
-    if bool == True and subm.created_utc <interval and subm.created_utc >interval_month:
+# for subm in hot_python:
+#     data_reddit_Dict = {}
+#     interval = time.time() - 60 * 60 * 24 * 7
+#     interval_month = time.time() - 60 * 60 * 24 * 30 * 2
+#     bool = True
+#     subreddit_title = subm.title
+#     subreddit_text = subm.selftext
+#     date1 = datetime.datetime.fromtimestamp(subm.created_utc).strftime("%Y-%m-%d")
+#     for test in word:
+#         if subreddit_title.find(test) != -1 or subreddit_text.find(test) != -1:
+#             print("*******")
+#             bool = False
+#             count1 += 1
+#             break
+#     if bool == True and subm.created_utc <interval and subm.created_utc >interval_month:
+#         count += 1
+#         data_reddit_Dict['id'] = subm.id
+#         data_reddit_Dict['date'] = datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d')
+#         data_reddit_Dict['title'] = subm.title
+#         data_reddit_Dict['text'] = subm.selftext
+#         list_data.append(data_reddit_Dict)
+#         data_reddit_Dict['date'] = subm.datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d')
+#         print("id: {} \ntitle : {}  \ndate : {}\ntext: {}".format(subm.id, subm.title, datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d'), subm.selftext))
+# data_reddit_Dict["data"] = list_data
+count_list = 0
+post_ = "data_json.json"
+with open(post_) as f:
+    creds = json.load(f)
+    for p in creds['data']:
+        reddit = random.choice(list_reddit_account)
+        print(reddit.user.me())
+        subreddit = reddit.subreddit('testmyreddits')
+        hot_python = subreddit.new(limit=10)
+        title1 = p['title']
+        text = p['text']
+        print(title1, text)
         count += 1
-        data_reddit_Dict['id'] = subm.id
-        data_reddit_Dict['date'] = datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d')
-        data_reddit_Dict['title'] = subm.title
-        data_reddit_Dict['text'] = subm.selftext
-        list_data.append(data_reddit_Dict)
-        # data_reddit_Dict['date'] = subm.datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d')
-        # print("id: {} \ntitle : {}  \ndate : {}\ntext: {}".format(subm.id, subm.title, datetime.datetime.fromtimestamp(subm.created_utc).strftime('%Y-%m-%d'), subm.selftext))
-data_reddit_Dict["data"] = list_data
-with open("data_json.json","w") as outfile:
-    json.dump(data_reddit_Dict,outfile)
-for x in list_data:
-    print(x)
+        subreddit.submit(title1, text)
+        time.sleep(7500)
+        if count == 2:
+            break
+    #json.dump(data_reddit_Dict,outfile)
+# for x in list_data:
+#     print(x)
 print("number the post used : "+str(count))
-print("day"+str(interval))
+# print("day"+str(interval))
 # print("month"+str(interval_month))
 print("number the post no used : "+str(count1))
