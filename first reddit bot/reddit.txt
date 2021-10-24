@@ -5,7 +5,13 @@ import praw
 import sys
 import json
 
-
+reddit1 = praw.Reddit(
+    client_id='xCQgBw-kL-Dh6ceO12hLPg',
+    client_secret='CW9QeOa_VMhAmnRWDBjpwD_aaWYpMQ',
+    password='jtQy+*$&p^eYQP3',
+    user_agent='ismail',
+    username='ismailELghazi',
+)
 reddit2 = praw.Reddit(
     client_id='WedJ5sB0CVd_eUSvTSNbQA',
     client_secret='oa5qu9AyuUyV5uRhPQzKLW1j8mT3hg',
@@ -41,7 +47,7 @@ reddit6 = praw.Reddit(
     user_agent='ismail4',
     username='fatima-zohra-pi',
 )
-list_reddit_account = [reddit5, reddit3, reddit2, reddit4, reddit6]
+list_reddit_account = [reddit5, reddit3, reddit2, reddit4, reddit1,reddit6]
 list_data = []
 count = 0
 count1 = 0
@@ -61,6 +67,7 @@ post_ = "data_json.json"
 with open(post_) as f:
     creds = json.load(f)
     for p in creds['data']:
+        try:
             reddit = random.choice(list_reddit_account)
             print(reddit.user.me())
             subreddit = reddit.subreddit('testmyreddits')
@@ -70,7 +77,8 @@ with open(post_) as f:
             time.sleep(8000)
             count += 1
             print(str(count))
-
+        except:
+            print("Something went wrong when writing to the file")
         # with open('for-test.json','w') as f:
         #     json.dump(creds,f)
 # for x in list_data:

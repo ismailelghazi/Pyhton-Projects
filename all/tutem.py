@@ -1,7 +1,14 @@
 from turtle import *
+
 ism = Turtle()
-ism.color("black")
-ism.shape("turtle")
-isd= Screen()
-ism.forward(200)
+isd = Screen()
+
+
+def move_():
+    ism.forward(100)
+    ism.forward(-90)
+
+
+isd.listen()
+isd.onkey(key="space", fun=move_)
 isd.exitonclick()
