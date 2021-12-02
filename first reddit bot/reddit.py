@@ -2,6 +2,7 @@ import time
 import random
 import praw
 # import datetime
+from pil import image
 import sys
 import json
 
