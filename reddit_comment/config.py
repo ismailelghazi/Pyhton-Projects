@@ -1,5 +1,0 @@
-client_id = '2owIcRaKwx4gbVU_DTd3JQ',
-client_secret = '9qeJ66kH066TMBJhDkMgUMjxwjOgaQ',
-password = '753198624/*-+',
-user_agent = 'ismail1',
-username = 'CharacterAnybody8800',
