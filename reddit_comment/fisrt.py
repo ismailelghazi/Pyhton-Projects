@@ -1,17 +1,17 @@
 import sys
-import time
 import praw
 from datetime import date
 import random
 import json
 import os
+import time
 
 reddit = praw.Reddit(
-    client_id='tuxe1nwe4PIyxARKSCYfoA',
-    client_secret='NGUmHTvdBDSBpvhBLpetFTyjJFdAxA',
-    password='753198624/*-+',
+    client_id='1py94aNGRxpn6jSG9yjiyw',
+    client_secret='Eo3nVnPFZkKfrTBm0QZm9cGljQGoPw',
+    password='Redditbot123',
     user_agent='ismail1',
-    username='Positive_Square728',
+    username='nfthomie',
 )
 today = date.today()
 d1 = today.strftime("%d/%m/%Y")
@@ -19,17 +19,16 @@ print("d1 =", d1)
 
 
 def get_id_post():
-    sub_name = ['how_want_comment_','heeelolo']
-    for sub in sub_name:
-        # sub = random.choice(sub_name)
-        subreddit = reddit.subreddit(sub)
-        submissions = subreddit.new()
-        list_reddit = []
-        for submission in submissions:
-            list_reddit.append(submission.id)
+    global list_reddit
+    sub_name = ['how_want_comment_','NFTExchange','NFT','NFTsMarketplace','NFTArt_Finance','NFTmarket','opensea','CryptoCurrency']
+    sub = random.choice(sub_name)
+    subreddit = reddit.subreddit(sub)
+    submissions = subreddit.new()
+    list_reddit = []
+    for submission in submissions:
+        list_reddit.append(submission.id,submission)
     return list_reddit
-while True:
-    print(get_id_post())
+
 def dataJson():
     with open('listId.txt', 'w') as json_file:
         json.dump(get_id_post(), json_file)
@@ -64,6 +63,7 @@ def comment():
                 print("eee")
                 submission = reddit.submission(id=ids)
                 print("aaa")
+                time.sleep(500)
                 submission.reply(comment_random)
             else:
                 print('post already commented on')
@@ -91,9 +91,9 @@ def comment():
 
 
 index = 0
-# while True:
-#     time.sleep(900)
-#     # comment()
-#     time.sleep(900)
-#     index += 1
-#     print(index)
+while True:
+    print(get_id_post())
+    time.sleep(100)
+    comment()
+    index += 1
+    print(index)
