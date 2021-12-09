@@ -6,6 +6,13 @@ import json
 import os
 import time
 
+reddit = praw.Reddit(
+    client_id='2UnDGCqOEVAPBH_40AGM5Q',
+    client_secret='xJ_PnfI7GASPqffymTT0cLE7cXVC6Q',
+    password='753198624/*-+',
+    user_agent='ismail1',
+    username='Positive_Square728',
+)
 today = date.today()
 d1 = today.strftime("%d/%m/%Y")
 print("d1 =", d1)
@@ -59,8 +66,9 @@ def comment():
                 print('commenting on a post in ' + subName)
                 comment_random = random.choice(list_data)
                 submission = reddit.submission(id=ids)
-                # time.sleep(250)
                 submission.reply(comment_random)
+                time.sleep(80)
+
             else:
                 print('post already commented on')
         dataJson()
@@ -80,7 +88,7 @@ def comment():
         for ids in listReddit:
             comment_random = random.choice(list_data)
             submission = reddit.submission(id=ids)
-            # time.sleep(250)
+            time.sleep(80)
             submission.reply(comment_random)
         dataJson()
         print('first time gen file ' + subName)
@@ -88,7 +96,6 @@ def comment():
 
 index = 0
 while True:
-    # time.sleep(100)
     comment()
     index += 1
     print(index)
