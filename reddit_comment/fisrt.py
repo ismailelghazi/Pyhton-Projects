@@ -7,11 +7,11 @@ import os
 import time
 
 reddit = praw.Reddit(
-    client_id='2UnDGCqOEVAPBH_40AGM5Q',
-    client_secret='xJ_PnfI7GASPqffymTT0cLE7cXVC6Q',
-    password='753198624/*-+',
-    user_agent='ismail1',
-    username='Positive_Square728',
+    client_id='**********************',
+    client_secret='******************',
+    password='*******************',
+    user_agent='*************',
+    username='****************',
 )
 today = date.today()
 d1 = today.strftime("%d/%m/%Y")
